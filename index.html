@@ -24,9 +24,9 @@
 </head>
 <body>
 	<div id="app" class="container">
-	  <h1>{{ quiz.title }}</h1>
+	  <h1>{{ game.title }}</h1>
 	  <!-- index is used to check with current question index -->
-	  <div v-for="(question, index) in quiz.questions">
+	  <div v-for="(question, index) in game.questions">
 	    <!-- Hide all questions, show only the one with index === to current question index -->
 	    <div v-show="index === questionIndex">
 	      <h2>{{ question.text }}</h2>
@@ -59,12 +59,12 @@
 	      </div>
 	    </div>
 	  </div>
-	  <div v-show="questionIndex === quiz.questions.length">
+	  <div v-show="questionIndex === game.questions.length">
 	    <h2>
 	    	Game finished
 	  	</h2>
 	    <p>
-	      Total score: {{ score() }} / {{ quiz.questions.length }}
+	      Total score: {{ score() }} / {{ game.questions.length }}
 	    </p>
 	  </div>
 	</div>

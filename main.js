@@ -4,7 +4,7 @@
 
 // Create a quiz object with a title and two questions.
 // A question has one or more answer, and one or more is valid.
-var quiz = {
+var game = {
   title: 'Test',
   questions: [
     {
@@ -40,12 +40,12 @@ var quiz = {
 new Vue({
   el: '#app',
   data: {
-    quiz: quiz,
+    game: game,
     // Store current question index
     questionIndex: 0,
     // An array initialized with "false" values for each question
     // It means: "did the user answered correctly to the question n?" "no".
-    userResponses: Array(quiz.questions.length).fill(false),
+    userResponses: Array(game.questions.length).fill(false),
     buttonClicked: false,
     descContent: ''
   },
