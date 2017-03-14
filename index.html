@@ -56,7 +56,9 @@
 	      				type="button">
 	        prev
 	      </button>
-	      <button v-on:click="next" v-bind:disabled="!buttonClicked ? true : false">
+	      <button v-on:click="next" v-bind:disabled="!buttonClicked ? true : false"
+	      				aria-pressed="false"
+	      				type="button">
 	        next
 	      </button>
 
