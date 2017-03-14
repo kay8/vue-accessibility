@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Vue Accessibility Test</title>
+	<style>
+		body {
+			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+		}
+		.container {
+			margin: 50px auto;
+			max-width: 600px;
+			width: 80%;
+		}
+		.response-desc {
+			margin-top: 20px;
+			background-color: #f6f6f6;
+			padding: 15px 20px;
+		}
+		.response-desc p {
+			margin: 0;
+		}
+	</style>
+</head>
+<body>
+	<div id="app" class="container">
+	  <h1>{{ quiz.title }}</h1>
+	  <!-- index is used to check with current question index -->
+	  <div v-for="(question, index) in quiz.questions">
+	    <!-- Hide all questions, show only the one with index === to current question index -->
+	    <div v-show="index === questionIndex">
+	      <h2>{{ question.text }}</h2>
+	      <ol>
+	        <li v-for="response in question.responses">
+	          <label>
+	            <!-- The radio button has three new directives -->
+	            <!-- v-bind:value sets "value" to "true" if the response is correct -->
+	            <!-- v-bind:name sets "name" to question index to group answers by question -->
+	            <!-- v-model creates binding with userResponses -->
+	            <input type="radio" 
+	                   v-bind:value="response.correct" 
+	                   v-bind:name="index" 
+	                   v-model="userResponses[index]"
+	                   v-on:click="showDesc(response.desc)"> {{ response.text }}
+	          </label>
+	        </li>
+	      </ol>
+	      <!-- The two navigation buttons -->
+	      <!-- Note: prev is hidden on first question -->
+	      <button v-if="questionIndex > 0" v-on:click="prev">
+	        prev
+	      </button>
+	      <button v-on:click="next" v-bind:disabled="!buttonClicked ? true : false">
+	        next
+	      </button>
+
+	      <div v-show="buttonClicked" class="response-desc">
+	      	<p>{{ descContent }}</p>
+	      </div>
+	    </div>
+	  </div>
+	  <div v-show="questionIndex === quiz.questions.length">
+	    <h2>
+	    	Game finished
+	  	</h2>
+	    <p>
+	      Total score: {{ score() }} / {{ quiz.questions.length }}
+	    </p>
+	  </div>
+	</div>
+
+	<script src="https://unpkg.com/vue@2.2.4"></script>
+	<script src="main.js"></script>
+</body>
+</html>
